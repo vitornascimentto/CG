@@ -65,6 +65,7 @@
 
 			}
 
+			// Variáveis
 			var camera, scene, renderer;
 			var plane, cube;
 			var mouse, raycaster, isShiftDown = false, madeiraEscura = false, madeiraClara = false, water = false, grama = false, terra = false;
@@ -75,6 +76,7 @@
 
 			var objects = [];
 
+			// Funções principais
 			init();
 			render();
 
@@ -96,7 +98,7 @@
 				rollOverMesh = new THREE.Mesh( rollOverGeo, rollOverMaterial );
 				scene.add( rollOverMesh );
 
-				// cubes
+				// Cubes
 
 				cubeGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
 				cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'textures/crate.gif' ) });
@@ -113,7 +115,7 @@
 				cubeTerra = new THREE.BoxBufferGeometry( 50, 50, 50 );
 				cubeMaterialTerra = new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load( 'textures/terrain/backgrounddetailed6.jpg' ) });
 
-				// grid
+				// Grid
 
 				var gridHelper = new THREE.GridHelper( 1000, 20 /*, 0xffffff, 0xffffff*/ );
 				scene.add( gridHelper );
@@ -313,8 +315,6 @@
 						window.location = './1.html'
     				});
 
-					
-
 					render();
 
 				}
@@ -327,14 +327,11 @@
 				}
 			}
 
-
 			function onDocumentKeyUp( event ) {
 				switch ( event.keyCode ) {
 					case 16: isShiftDown = false; break;
 				}
-
 			}
-
 
 			function render() {
 				renderer.render( scene, camera );
