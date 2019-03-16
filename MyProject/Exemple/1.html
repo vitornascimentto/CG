@@ -26,6 +26,11 @@
 			a {
 				color: #ff0000;
 			}
+			
+			#interna {
+				margin: 0 auto;
+				width: 60%; /* Valor da Largura */
+			} 
 		</style>
 	</head>
 	<body>
@@ -35,7 +40,7 @@
 			<strong>click</strong>: add voxel, <strong>shift + click</strong>: remove voxel
 		</div>-->
 
-		<div>
+		<div id="interna">
 			<button id="QE"> Madeira Escura </button>
 			<button id="QC"> Madeira Clara </button>
 			<button id="agua"> Água </button>
@@ -65,7 +70,8 @@
 			var mouse, raycaster, isShiftDown = false, madeiraEscura = false, madeiraClara = false, water = false, grama = false, terra = false;
 
 			var rollOverMesh, rollOverMaterial;
-			var cubeGeo, cubeMaterial, cubeGeo2, cubeMaterial2;
+			var cubeGeo, cubeMaterial, cubeGeo2, cubeMaterial2, cubeWater, cubeMaterialWater;
+			var cubeGrama, cubeMaterialGrama, cubeTerra, cubeMaterialTerra;
 
 			var objects = [];
 
@@ -279,18 +285,12 @@
 							objects.splice( objects.indexOf( intersect.object ), 1 );
 						}
 
-						// create cube
+					// create cube
 
 					} else if ( madeiraClara ){
 						
 						build (cubeGeo2, cubeMaterial2);
 
-						/*var voxel = new THREE.Mesh( cubeGeo2, cubeMaterial2 );
-						voxel.position.copy( intersect.point ).add( intersect.face.normal );
-						voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
-						scene.add( voxel );
-
-						objects.push( voxel );*/
 					} else if ( water ){
 						
 						build ( cubeWater, cubeMaterialWater );
@@ -306,13 +306,6 @@
 					} else if ( madeiraEscura ) {
 
 						build ( cubeGeo, cubeMaterial );
-						
-						/*var voxel = new THREE.Mesh( cubeGeo, cubeMaterial );
-						voxel.position.copy( intersect.point ).add( intersect.face.normal );
-						voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
-						scene.add( voxel );
-
-						objects.push( voxel );*/
 
 					}
 
