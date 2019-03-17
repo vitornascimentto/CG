@@ -41,11 +41,15 @@
 		</div>-->
 
 		<div id="interna">
-			<button id="QE"> Madeira Escura </button>
-			<button id="QC"> Madeira Clara </button>
+			<button id="madeiraE"> Madeira Escura </button>
+			<button id="madeiraC"> Madeira Clara </button>
 			<button id="agua"> Água </button>
 			<button id="grama"> Grama </button>
 			<button id="terra"> Terra </button>
+			<button id="areia"> Areia </button>
+			<button id="caixote"> Caixote </button>
+			<button id="muro"> Muro </button>
+			<button id="rocha"> Rocha </button>
 			<button id="apagar"> Apagar </button>
 			<button id="reiniciar"> Reiniciar </button>
 			<button id="mover"> Mover Camera </button>
@@ -69,10 +73,13 @@
 			var camera, scene, renderer;
 			var plane, cube;
 			var mouse, raycaster, isShiftDown = false, madeiraEscura = false, madeiraClara = false, water = false, grama = false, terra = false;
+			var areia = false, caixote = false, muro = false, rocha = false;
 
 			var rollOverMesh, rollOverMaterial;
 			var cubeGeo, cubeMaterial, cubeGeo2, cubeMaterial2, cubeWater, cubeMaterialWater;
 			var cubeGrama, cubeMaterialGrama, cubeTerra, cubeMaterialTerra;
+			var cubeAreia, cubeMaterialAreia, cubeCaixote, cubeMaterialCaixote;
+			var cubeMuro, cubeMaterialMuro, cubeRocha, cubeMaterialRocha;
 
 			var objects = [];
 
@@ -106,7 +113,7 @@
 				cubeGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
 				cubeMaterial = new THREE.MeshLambertMaterial( { 
 					/*color: 0xfeb74c, */
-					map: new THREE.TextureLoader().load( 'textures/crate.gif' ) 
+					map: new THREE.TextureLoader().load( 'textures/minecraft/madeira.jpeg' ) 
 				});
 
 				cubeGeo2 = new THREE.BoxBufferGeometry( 50, 50, 50 );
@@ -132,12 +139,22 @@
 
 				cubeAreia = new THREE.BoxBufferGeometry( 50, 50, 50 );
 				cubeMaterialAreia = new THREE.MeshLambertMaterial( { 
-					map: new THREE.TextureLoader().load ('')
+					map: new THREE.TextureLoader().load ('textures/minecraft/areia.jpg')
 				});
 
-				cubeMadeiraEscura = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterialMadeiraEscura = new THREE.MeshLambertMaterial( { 
-					map: new THREE.TextureLoader().load ('')
+				cubeCaixote = new THREE.BoxBufferGeometry( 50, 50, 50 );
+				cubeMaterialCaixote = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load ('textures/crate.gif')
+				});
+
+				cubeMuro = new THREE.BoxBufferGeometry( 50, 50, 50 );
+				cubeMaterialMuro = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load ('textutes/minecraft/muro.jpg')
+				});
+
+				cubeRocha = new THREE.BoxBufferGeometry( 50, 50, 50 );
+				cubeMaterialRocha = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load ('textutes/minecraft/rocha2.jpg')
 				});
 
 				// Grid
@@ -228,22 +245,30 @@
 
 				
 
-				document.getElementById('QC').addEventListener('click', () => {
+				document.getElementById('madeiraE').addEventListener('click', () => {
 					madeiraClara = true;
 					madeiraEscura = false;
 					water = false;
 					grama = false;
 					terra = false;
 					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
 				});
 
-				document.getElementById('QE').addEventListener('click', () => {
+				document.getElementById('madeiraC').addEventListener('click', () => {
 					madeiraClara = false;
 					madeiraEscura = true;
 					water = false;
 					grama = false;
 					terra = false;
 					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
 				});
 
 				document.getElementById('agua').addEventListener('click', () => {
@@ -253,6 +278,10 @@
 					grama = false;
 					terra = false;
 					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
 				});
 
 				document.getElementById('grama').addEventListener('click', () => {
@@ -262,6 +291,10 @@
 					grama = true;
 					terra = false;
 					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
 				});
 
 				document.getElementById('terra').addEventListener('click', () => {
@@ -271,6 +304,10 @@
 					grama = false;
 					terra = true;
 					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
 				});
 
 				document.getElementById('apagar').addEventListener('click', () => {
@@ -280,6 +317,10 @@
 					grama = false;
 					terra = false;
 					isShiftDown = true;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
 				});
 
 				document.getElementById('mover').addEventListener('click', () => {
@@ -289,6 +330,62 @@
 					grama = false;
 					terra = false;
 					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = false;
+				});
+
+				document.getElementById('areia').addEventListener('click', () => {
+					madeiraClara = false;
+					madeiraEscura = false;
+					water = false;
+					grama = false;
+					terra = false;
+					isShiftDown = false;
+					areia = true;
+					caixote = false;
+					muro = false;
+					rocha = false;
+				});
+
+				document.getElementById('caixote').addEventListener('click', () => {
+					madeiraClara = false;
+					madeiraEscura = false;
+					water = false;
+					grama = false;
+					terra = false;
+					isShiftDown = false;
+					areia = false;
+					caixote = true;
+					muro = false;
+					rocha = false;
+				});
+
+				document.getElementById('muro').addEventListener('click', () => {
+					madeiraClara = false;
+					madeiraEscura = false;
+					water = false;
+					grama = false;
+					terra = false;
+					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = true;
+					rocha = false;
+				});
+
+				document.getElementById('rocha').addEventListener('click', () => {
+					madeiraClara = false;
+					madeiraEscura = false;
+					water = false;
+					grama = false;
+					terra = false;
+					isShiftDown = false;
+					areia = false;
+					caixote = false;
+					muro = false;
+					rocha = true;
 				});
 
 				event.preventDefault();
@@ -333,6 +430,22 @@
 					} else if ( madeiraEscura ) {
 
 						build ( cubeGeo, cubeMaterial );
+
+					} else if ( areia ) {
+
+						build ( cubeAreia, cubeMaterialAreia );
+
+					} else if ( caixote ) {
+
+						build ( cubeCaixote, cubeMaterialCaixote );
+
+					} else if ( muro ) {
+
+						build ( cubeMuro, cubeMaterialMuro );
+
+					} else if ( rocha ) {
+
+						build ( cubeRocha, cubeMaterialRocha );
 
 					}
 
