@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - interactive - voxel painter</title>
+		<title> Projeto </title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -82,12 +82,15 @@
 
 			function init() {
 
+				// Criando e posicionando a câmera
 				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.set( 500, 300, 1300 );
 				camera.lookAt( 0, 0, 0 );
-
+				
+				// Dando movimento a câmera
 				var controls = new THREE.OrbitControls( camera );
-
+				
+				// Criando a cena e colocando um background
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xf0f0f0 );
 
@@ -101,23 +104,45 @@
 				// Cubes
 
 				cubeGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterial = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'textures/crate.gif' ) });
+				cubeMaterial = new THREE.MeshLambertMaterial( { 
+					/*color: 0xfeb74c, */
+					map: new THREE.TextureLoader().load( 'textures/crate.gif' ) 
+				});
 
 				cubeGeo2 = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xfeb74c, map: new THREE.TextureLoader().load( 'textures/square-outline-textured.png' ) });
+				cubeMaterial2 = new THREE.MeshLambertMaterial( { 
+					/*color: 0xfeb74c, */
+					map: new THREE.TextureLoader().load( 'textures/minecraft/madeiraClara.png' ) 
+				});
 
 				cubeWater = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterialWater = new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load( 'textures/water/Water_2_M_Normal.jpg' ) });
+				cubeMaterialWater = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load( 'textures/water/Water_2_M_Normal.jpg' ) 
+				});
 
 				cubeGrama = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterialGrama = new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load( 'textures/minecraft/grass.png' ) });
+				cubeMaterialGrama = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load( 'textures/minecraft/grass.png' ) 
+				});
 
 				cubeTerra = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterialTerra = new THREE.MeshLambertMaterial( { map: new THREE.TextureLoader().load( 'textures/terrain/backgrounddetailed6.jpg' ) });
+				cubeMaterialTerra = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load( 'textures/terrain/backgrounddetailed6.jpg' ) 
+				});
+
+				cubeAreia = new THREE.BoxBufferGeometry( 50, 50, 50 );
+				cubeMaterialAreia = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load ('')
+				});
+
+				cubeMadeiraEscura = new THREE.BoxBufferGeometry( 50, 50, 50 );
+				cubeMaterialMadeiraEscura = new THREE.MeshLambertMaterial( { 
+					map: new THREE.TextureLoader().load ('')
+				});
 
 				// Grid
 
-				var gridHelper = new THREE.GridHelper( 1000, 20 /*, 0xffffff, 0xffffff*/ );
+				var gridHelper = new THREE.GridHelper( 1000, 20, 0xff0000, 0xff0000 /*, 0xffffff, 0xffffff*/ );
 				scene.add( gridHelper );
 
 				//
@@ -125,7 +150,7 @@
 				raycaster = new THREE.Raycaster();
 				mouse = new THREE.Vector2();
 
-				//Plano
+				// Plano
 				var geometry = new THREE.PlaneBufferGeometry( 1000, 1000 );
 				geometry.rotateX( - Math.PI / 2 ); // Dar a física a cena, quadrado no chão.
 
