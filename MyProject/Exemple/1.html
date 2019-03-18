@@ -149,12 +149,12 @@
 
 				cubeMuro = new THREE.BoxBufferGeometry( 50, 50, 50 );
 				cubeMaterialMuro = new THREE.MeshLambertMaterial( { 
-					map: new THREE.TextureLoader().load ('textutes/minecraft/muro.jpg')
+					map: new THREE.TextureLoader().load ('textures/minecraft/muro.jpg')
 				});
 
 				cubeRocha = new THREE.BoxBufferGeometry( 50, 50, 50 );
 				cubeMaterialRocha = new THREE.MeshLambertMaterial( { 
-					map: new THREE.TextureLoader().load ('textutes/minecraft/rocha2.jpg')
+					map: new THREE.TextureLoader().load ('textures/minecraft/rocha2.jpg')
 				});
 
 				// Grid
@@ -245,7 +245,7 @@
 
 				
 
-				document.getElementById('madeiraE').addEventListener('click', () => {
+				document.getElementById('madeiraC').addEventListener('click', () => {
 					madeiraClara = true;
 					madeiraEscura = false;
 					water = false;
@@ -258,7 +258,7 @@
 					rocha = false;
 				});
 
-				document.getElementById('madeiraC').addEventListener('click', () => {
+				document.getElementById('madeiraE').addEventListener('click', () => {
 					madeiraClara = false;
 					madeiraEscura = true;
 					water = false;
