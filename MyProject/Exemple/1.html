@@ -101,6 +101,27 @@
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0xf0f0f0 );
 
+				// Images of the sky
+				var imagePrefix = "images/minecraft-";
+				var directions = ["right", "left", "up", "grama", "down" , "back"];
+				var imageSuffix = ".png";
+				var skyGeometry = new THREE.CubeGeometry( 3000, 3000, 3000 );
+
+				var materialArray = [];
+				for (var i = 0; i < 6; i++){
+					(directions[i] == "grama")
+						? imageSuffix = ".jpg"
+						: imageSuffix = ".png"
+
+					materialArray.push(new THREE.MeshBasicMaterial({
+						map: THREE.ImageUtils.loadTexture(imagePrefix + directions[i] + imageSuffix),
+						side: THREE.BackSide
+					}));
+				}
+				var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
+				var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+				scene.add(skyBox);
+
 				// roll-over helpers
 
 				var rollOverGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
@@ -159,7 +180,13 @@
 
 				// Grid
 
-				var gridHelper = new THREE.GridHelper( 1000, 20, 0xff0000, 0xff0000 /*, 0xffffff, 0xffffff*/ );
+				var gridHelper = new THREE.GridHelper( 
+					3000, 
+					60,
+					0x228B22, 
+					0x228B22
+					/*0xff0000, 0xff0000 , 0xffffff, 0xffffff*/ 
+				);
 				scene.add( gridHelper );
 
 				//
@@ -168,10 +195,14 @@
 				mouse = new THREE.Vector2();
 
 				// Plano
-				var geometry = new THREE.PlaneBufferGeometry( 1000, 1000 );
+				var geometry = new THREE.PlaneBufferGeometry( 3000, 3000 );
 				geometry.rotateX( - Math.PI / 2 ); // Dar a física a cena, quadrado no chão.
 
-				plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { /*color: 0xffffff 0x00c500,*/ visible: false } ) );
+				plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { 
+					color: 0x228B22,
+					/*color: 0xffffff 0x00c500,*/ 
+					visible: true 
+				}));
 				scene.add( plane );
 
 				objects.push( plane );
@@ -237,7 +268,7 @@
 				function build( geo, material ){
 					var voxel = new THREE.Mesh( geo, material );
 					voxel.position.copy( intersect.point ).add( intersect.face.normal );
-					voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 );
+					voxel.position.divideScalar( 50 ).floor().multiplyScalar( 50 ).addScalar( 25 ); // Colisão
 					scene.add( voxel );
 
 					objects.push( voxel );
