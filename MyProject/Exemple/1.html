@@ -90,7 +90,7 @@
 			function init() {
 
 				// Criando e posicionando a câmera
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 100000 );
 				camera.position.set( 500, 300, 1300 );
 				camera.lookAt( 0, 0, 0 );
 				
@@ -105,7 +105,7 @@
 				var imagePrefix = "images/minecraft-";
 				var directions = ["right", "left", "up", "grama", "down" , "back"];
 				var imageSuffix = ".png";
-				var skyGeometry = new THREE.CubeGeometry( 3000, 3000, 3000 );
+				var skyGeometry = new THREE.CubeGeometry( 12000, 12000, 12000 );
 
 				var materialArray = [];
 				for (var i = 0; i < 6; i++){
@@ -125,14 +125,18 @@
 				// roll-over helpers
 
 				var rollOverGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				rollOverMaterial = new THREE.MeshBasicMaterial( { color: 0xff0000, opacity: 0.5, transparent: true } );
+				rollOverMaterial = new THREE.MeshBasicMaterial({ 
+					color: 0xff0000, 
+					opacity: 0.5, 
+					transparent: true 
+				});
 				rollOverMesh = new THREE.Mesh( rollOverGeo, rollOverMaterial );
 				scene.add( rollOverMesh );
 
 				// Cubes
 
 				cubeGeo = new THREE.BoxBufferGeometry( 50, 50, 50 );
-				cubeMaterial = new THREE.MeshLambertMaterial( { 
+				cubeMaterial = new THREE.MeshLambertMaterial({ 
 					/*color: 0xfeb74c, */
 					map: new THREE.TextureLoader().load( 'textures/minecraft/madeira.jpeg' ) 
 				});
@@ -180,32 +184,52 @@
 
 				// Grid
 
+				
+
+
 				var gridHelper = new THREE.GridHelper( 
-					3000, 
-					60,
-					0x228B22, 
-					0x228B22
+					12000, 
+					240,
+					0x006400,
+					0x006400
+					//0x228B22, 
+					//0x228B22
 					/*0xff0000, 0xff0000 , 0xffffff, 0xffffff*/ 
 				);
 				scene.add( gridHelper );
 
+
+				var floorTexture = new THREE.ImageUtils.loadTexture( 'images/minecraft-grama.jpg' );
+				floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+				floorTexture.repeat.set( 10, 10 );
+				var floorMaterial = new THREE.MeshBasicMaterial({ 
+					map: floorTexture, side: THREE.DoubleSide 
+				});
+				var floorGeometry = new THREE.PlaneBufferGeometry( 12000, 12000 );
+				floorGeometry.rotateX( - Math.PI / 2 );
+				var floor = new THREE.Mesh( floorGeometry, floorMaterial );
+				//floor.position.y = -0.5;
+				//floor.rotation.x = - Math.PI / 2;
+				scene.add(floor);
+				// SKYBOX/FOG
+				scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
 				//
 
 				raycaster = new THREE.Raycaster();
 				mouse = new THREE.Vector2();
 
 				// Plano
-				var geometry = new THREE.PlaneBufferGeometry( 3000, 3000 );
-				geometry.rotateX( - Math.PI / 2 ); // Dar a física a cena, quadrado no chão.
+				//var geometry = new THREE.PlaneBufferGeometry( 6000, 6000 );
+				//geometry.rotateX( - Math.PI / 2 ); // Dar a física a cena, quadrado no chão.
 
-				plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial( { 
+				/*plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({ 
 					color: 0x228B22,
-					/*color: 0xffffff 0x00c500,*/ 
+					/*color: 0xffffff 0x00c500, 
 					visible: true 
 				}));
-				scene.add( plane );
+				scene.add( plane );*/
 
-				objects.push( plane );
+				objects.push( floor );
 
 				// lights
 
