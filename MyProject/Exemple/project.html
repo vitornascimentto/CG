@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title> Projeto </title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background:#777;
+				padding:0;
+				margin:0;
+				font-weight: bold;
+				overflow:hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 0px;
+				width: 100%;
+				padding: 5px;
+				font-family:Monospace;
+				font-size:13px;
+				text-align:center;
+			}
+
+			a {
+				color: #ff0000;
+			}
+			
+			#interna {
+				margin: 0 auto;
+				width: 60%; /* Valor da Largura */
+			} 
+		</style>
+	</head>
+	<body>
+
+		<!--<div id="info">
+			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - voxel painter - webgl<br>
+			<strong>click</strong>: add voxel, <strong>shift + click</strong>: remove voxel
+		</div>-->
+
+		<div id="interna">
+			<button id="madeiraE"> Madeira Escura </button>
+			<button id="madeiraC"> Madeira Clara </button>
+			<button id="agua"> Água </button>
+			<button id="grama"> Grama </button>
+			<button id="terra"> Terra </button>
+			<button id="areia"> Areia </button>
+			<button id="caixote"> Caixote </button>
+			<button id="muro"> Muro </button>
+			<button id="rocha"> Rocha </button>
+			<button id="apagar"> Apagar </button>
+			<button id="reiniciar"> Reiniciar </button>
+			<button id="mover"> Mover Camera </button>
+		</div>
+
+		<script src="../build/three.js"></script>
+
+		<script src="js/WebGL.js"></script>
+
+		<script src="js/controls/OrbitControls.js"></script>
+
+		<script src="functions.js"></script>
+
+	</body>
+</html>
