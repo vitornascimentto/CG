@@ -109,46 +109,44 @@ function init() {
     var gridHelper = new THREE.GridHelper( 
         12000, 
         240,
-        0x006400,
-        0x006400 
+        0x228B22,
+        0x228B22 
     );
     scene.add( gridHelper );
 
     // Floor
-    var floorTexture = new THREE.ImageUtils.loadTexture( 'images/minecraft-grama.jpg' );
-    floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
-    floorTexture.repeat.set( 10, 10 );
+    /*var planeTexture = new THREE.ImageUtils.loadTexture( 'images/minecraft-grama.jpg' );
+    planeTexture.wrapS = planeTexture.wrapT = THREE.RepeatWrapping; 
+    planeTexture.repeat.set( 10, 10 );
     
-    var floorMaterial = new THREE.MeshBasicMaterial({ 
-        map: floorTexture, 
+    var planeMaterial = new THREE.MeshBasicMaterial({ 
+        map: planeTexture, 
         side: THREE.DoubleSide,
-        visible: true 
+        visible: true
     });
-    
     var geometry = new THREE.PlaneBufferGeometry( 12000, 12000 );
     geometry.rotateX( - Math.PI / 2 );
     
-    var plane = new THREE.Mesh( geometry, floorMaterial );
-    //floor.position.y = -0.5;
-    //floor.rotation.x = - Math.PI / 2;
+    var plane = new THREE.Mesh( geometry, planeMaterial );
+    floor.position.y = -0.5;
+    floor.rotation.x = - Math.PI / 2;
     scene.add( plane );
-    
+    */
     // SKYBOX/FOG
-    scene.fog = new THREE.FogExp2( 0x9999ff, 0.00025 );
+    scene.fog = new THREE.FogExp2( 0x9999ff, 0.00015 );
 
     raycaster = new THREE.Raycaster();
     mouse = new THREE.Vector2();
 
     // Plano
-    //var geometry = new THREE.PlaneBufferGeometry( 6000, 6000 );
-    //geometry.rotateX( - Math.PI / 2 ); // Dar a física a cena, quadrado no chão.
+    var geometry = new THREE.PlaneBufferGeometry( 12000, 12000 );
+    geometry.rotateX( - Math.PI / 2 ); // Dar a física a cena, quadrado no chão.
 
-    /*plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({ 
-        color: 0x228B22,
-        /*color: 0xffffff 0x00c500, 
+    plane = new THREE.Mesh( geometry, new THREE.MeshBasicMaterial({ 
+        color: 0x228B22, 
         visible: true 
     }));
-    scene.add( plane );*/
+    scene.add( plane );
 
     objects.push( plane );
 
