@@ -11,10 +11,8 @@ var mouse, raycaster, isShiftDown = false, madeiraEscura = false, madeiraClara =
 var areia = false, caixote = false, muro = false, rocha = false;
 
 var rollOverMesh, rollOverMaterial;
-var cubeGeo, cubeMaterial, cubeGeo2, cubeMaterial2, cubeWater, cubeMaterialWater;
-var cubeGrama, cubeMaterialGrama, cubeTerra, cubeMaterialTerra;
-var cubeAreia, cubeMaterialAreia, cubeCaixote, cubeMaterialCaixote;
-var cubeMuro, cubeMaterialMuro, cubeRocha, cubeMaterialRocha;
+var cubeGeo, cubeMaterial, cubeMaterial2, cubeMaterialWater;
+var cubeMaterialGrama, cubeMaterialTerra, cubeMaterialAreia, cubeMaterialCaixote, cubeMaterialMuro, cubeMaterialRocha;
 
 var objects = [];
 
@@ -114,24 +112,6 @@ function init() {
     );
     scene.add( gridHelper );
 
-    // Floor
-    /*var planeTexture = new THREE.ImageUtils.loadTexture( 'images/minecraft-grama.jpg' );
-    planeTexture.wrapS = planeTexture.wrapT = THREE.RepeatWrapping; 
-    planeTexture.repeat.set( 10, 10 );
-    
-    var planeMaterial = new THREE.MeshBasicMaterial({ 
-        map: planeTexture, 
-        side: THREE.DoubleSide,
-        visible: true
-    });
-    var geometry = new THREE.PlaneBufferGeometry( 12000, 12000 );
-    geometry.rotateX( - Math.PI / 2 );
-    
-    var plane = new THREE.Mesh( geometry, planeMaterial );
-    floor.position.y = -0.5;
-    floor.rotation.x = - Math.PI / 2;
-    scene.add( plane );
-    */
     // SKYBOX/FOG
     scene.fog = new THREE.FogExp2( 0x9999ff, 0.00015 );
 
